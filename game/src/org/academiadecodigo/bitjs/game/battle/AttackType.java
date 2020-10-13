@@ -1,4 +1,4 @@
-package org.academiadecodigo.bitjs.game;
+package org.academiadecodigo.bitjs.game.battle;
 
 
     /*Defines the type of attack of the player and its intensity that goes as an

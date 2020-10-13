@@ -1,4 +1,6 @@
-package org.academiadecodigo.bitjs.game;
+package org.academiadecodigo.bitjs.game.gameobjects.enemy;
+
+import org.academiadecodigo.bitjs.game.battle.Damage;
 
 public class Enemy implements Damage {
 

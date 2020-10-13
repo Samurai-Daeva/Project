@@ -1,7 +1,8 @@
-package org.academiadecodigo.bitjs.game;
+package org.academiadecodigo.bitjs.game.gameobjects;
 
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.bitjs.game.battle.*;
 
 public class Player implements Damage, KeyboardHandler {
 

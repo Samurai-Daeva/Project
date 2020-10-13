@@ -1,4 +1,4 @@
-package org.academiadecodigo.bitjs.game;
+package org.academiadecodigo.bitjs.game.battle;
 
 public interface Damage {
 

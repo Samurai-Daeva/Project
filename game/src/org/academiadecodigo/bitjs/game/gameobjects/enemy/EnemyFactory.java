@@ -1,6 +1,8 @@
-package org.academiadecodigo.bitjs.game;
+package org.academiadecodigo.bitjs.game.gameobjects.enemy;
 
 // creates enemies accordingly do the EnemyType passed as argument
+
+import org.academiadecodigo.bitjs.game.gameobjects.PC;
 
 public class EnemyFactory {
 
