@@ -3,12 +3,12 @@ package org.academiadecodigo.bitjs.game.graphicsbuilder;
 import org.academiadecodigo.bitjs.game.gameobjects.Player;
 
 public class GraphicsHandler {
-    private Room room;
+    private Field field;
     private Player player;
 
 
     public GraphicsHandler(){
-        this.room = new Room(room.getName());
+        this.field = new Field(field.getName());
     }
 
     /*

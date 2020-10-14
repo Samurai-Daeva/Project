@@ -2,6 +2,7 @@ package org.academiadecodigo.bitjs.game;
 
 import org.academiadecodigo.bitjs.game.gameobjects.Player;
 import org.academiadecodigo.bitjs.game.gameobjects.enemy.Enemy;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.Field;
 
 public class Main {
 
@@ -11,6 +12,8 @@ public class Main {
         Enemy[] enemies;
 
         Game game = new Game(player);
+        Field field = new Field("field");
+        field.init();
 
         enemies = game.sortEnemies();
 

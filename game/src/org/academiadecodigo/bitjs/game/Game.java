@@ -1,5 +1,10 @@
 package org.academiadecodigo.bitjs.game;
 
+import org.academiadecodigo.bitjs.game.gameobjects.Player;
+import org.academiadecodigo.bitjs.game.gameobjects.enemy.Enemy;
+import org.academiadecodigo.bitjs.game.gameobjects.enemy.EnemyFactory;
+import org.academiadecodigo.bitjs.game.gameobjects.enemy.EnemyType;
+
 public class Game {
 
     private Player player;
