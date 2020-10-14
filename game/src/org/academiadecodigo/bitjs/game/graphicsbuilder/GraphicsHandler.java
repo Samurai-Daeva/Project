@@ -8,7 +8,7 @@ public class GraphicsHandler {
 
 
     public GraphicsHandler(){
-        this.field = new Field(field.getName());
+        this.field = new Field();
     }
 
     /*

@@ -1,84 +1,119 @@
 package org.academiadecodigo.bitjs.game;
 
-import org.academiadecodigo.bitjs.game.gameobjects.Player;
-import org.academiadecodigo.bitjs.game.gameobjects.enemy.Enemy;
-import org.academiadecodigo.bitjs.game.gameobjects.enemy.EnemyFactory;
-import org.academiadecodigo.bitjs.game.gameobjects.enemy.EnemyType;
 
+import org.academiadecodigo.bitjs.game.gameobjects.Character;
+import org.academiadecodigo.bitjs.game.gameobjects.Player;
+import org.academiadecodigo.bitjs.game.gameobjects.npcs.NPCFactory;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridFactory;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridType;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+/**
+ * The game logic
+ */
 public class Game {
 
+
+    /**
+     * Graphical Car field
+     */
+    private Grid grid;
+
+    /**
+     * Container of Cars
+     */
+    private Character[] cars;
+
     private Player player;
-    private Enemy[] enemies;
-    private boolean complete;
 
-    public Game(Player player) {
-        this.enemies = new Enemy[9];
-        this.player = player;
-    }
+    private Picture picture = new Picture(0,0,"resources/player1.png");
 
-    /* method that puts enemies in an array that were created in the enemy factory.
-        Creates a PC in the index 0 and 1 and then sort them evenly. Returns an array of enemies*/
-    public Enemy[] sortEnemies() {
+    /**
+     * Animation delay
+     */
+    private int delay;
 
-        EnemyFactory enemyFactory = new EnemyFactory();
-        int counter = 1;
+    /**
+     * The collision detector
+     */
+    private CollisionDetector collisionDetector;
 
-        for (int i = 1; i < enemies.length; i++) {
+    /**
+     * Number of cars to manufacture
+     */
+    private int manufacturedCars = 20;
 
-            enemies[0] = enemyFactory.createEnemy(EnemyType.values()[0]);
 
-            if (i % 2 != 0) {
+    /**
+     * Constructs a new game
+     * @param gridType which grid type to use
+     * @param cols number of columns in the grid
+     * @param rows number of rows in the grid
+     * @param delay animation delay
+     */
+    Game(GridType gridType, int cols, int rows, int delay) {
 
-                enemies[i] = enemyFactory.createEnemy(EnemyType.values()[0]);
-
-            } else {
-
-                enemies[i] = enemyFactory.createEnemy(EnemyType.values()[counter]);
-                counter++;
-
-            }
-
-            System.out.println(enemies[i]);
-        }
-
-        return enemies;
+        grid = GridFactory.makeGrid(gridType, cols, rows);
+        this.delay = delay;
 
     }
-    /*method that takes a player and an enemy as argument and invokes their methods of damage
-    with a 10% chance of missing and a 80% advantage to the player*/
 
-    public void attack(Player player, Enemy enemy) {
+    /**
+     * Creates a bunch of cars and randomly puts them in the field
+     */
+    public void init() {
 
-        for (int i = 0; i < enemies.length; i++) {
+        grid.init();
 
+        cars = new Character[manufacturedCars];
+        collisionDetector = new CollisionDetector(cars);
+        cars[0] = new Player(grid.makeGridPosition(0,0, picture),picture);
+        player = (Player) cars[0];
+        for (int i = 1; i < manufacturedCars; i++) {
+            //if(cars[i] instanceof Car) {
 
-            double random = Math.random();
-
-            if (random < 0.1) {
-
-                System.out.println("miss.");
-
-            } else if (random >= 0.1 && random <= 0.2) {
-
-                player.damage(enemy.getDamageCapacity());
-                System.out.println(player + " " + player.getHealth());
-                System.out.println(enemy.getHealth());
-
-            } else {
-
-                while (!(enemy.isDamaged())) {
-
-                    enemy.damage(player.getDamageCapacity());
-                    System.out.println(enemy + " " + enemy.getHealth());
-                    System.out.println(player.getHealth());
-
-                }
-
-            }
-
+            // Car car = (Car) cars[i];
+            cars[i] = NPCFactory.getNewCharacter(grid);
+            cars[i].setCollisionDetector(collisionDetector);
+            cars[i].setGrid(grid);
         }
     }
+
+
+
+    /**
+     * Starts the animation
+     *
+     * @throws InterruptedException
+     */
+    public void start() throws InterruptedException {
+
+        while (true) {
+
+            // Pause for a while
+            Thread.sleep(delay);
+/*
+            player.pressDown();
+            player.pressLeft();
+            player.pressRight();
+            player.pressUp();
+
+ */
+            //moveAllCars();
+
+        }
+
+    }
+
+    /**
+     * Moves all cars
+     */
+   /* public void moveAllCars() {
+        for (Car c : cars) {
+            c.move();
+            collisionDetector.check(c);
+        }
+    }*/
 
 }
-
-

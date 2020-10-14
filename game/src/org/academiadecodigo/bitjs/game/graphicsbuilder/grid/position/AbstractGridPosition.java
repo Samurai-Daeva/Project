@@ -1,9 +1,9 @@
-package org.academiadecodigo.bootcamp.grid.position;
+package org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position;
 
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridColor;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridDirection;
-import org.academiadecodigo.bootcamp.grid.position.GridPosition;
+
 
 
 
@@ -72,28 +72,28 @@ public abstract class AbstractGridPosition implements GridPosition {
         return this.col == pos.getCol() && this.row == pos.getRow();
     }
 
-    private void moveUp(int dist) {
+    protected void moveUp(int dist) {
 
         int maxRowsUp = Math.min(dist,getRow());
         setPos(getCol(), getRow() - maxRowsUp);
 
     }
 
-    private void moveDown(int dist) {
+    protected void moveDown(int dist) {
 
         int maxRowsDown = Math.min(getGrid().getRows() - (getRow() + 1),dist);
         setPos(getCol(), getRow() + maxRowsDown);
 
     }
 
-    private void moveLeft(int dist) {
+    protected void moveLeft(int dist) {
 
         int maxRowsLeft = Math.min(dist,getCol());
         setPos(getCol() - maxRowsLeft, getRow());
 
     }
 
-    private void moveRight(int dist) {
+    protected void moveRight(int dist) {
 
         int maxRowsRight = Math.min(getGrid().getCols() - (getCol() + 1), dist);
         setPos(getCol() + maxRowsRight, getRow());

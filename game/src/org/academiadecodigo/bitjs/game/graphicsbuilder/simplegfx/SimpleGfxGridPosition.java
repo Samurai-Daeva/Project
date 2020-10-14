@@ -1,9 +1,9 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx;
 
-
-import org.academiadecodigo.bootcamp.grid.position.AbstractGridPosition;
-import org.academiadecodigo.bootcamp.grid.position.GridPosition;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridDirection;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.AbstractGridPosition;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
 
 
 /**
@@ -11,8 +11,10 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
  */
 public class SimpleGfxGridPosition extends AbstractGridPosition {
 
-    private Rectangle rectangle;
+    private Picture rectangle;
     private SimpleGfxGrid simpleGfxGrid;
+    private int col;
+    private int row;
 
     /**
      * Simple graphics position constructor
@@ -21,13 +23,8 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
     public SimpleGfxGridPosition(SimpleGfxGrid grid){
         super((int) (Math.random() * grid.getCols()), (int) (Math.random() * grid.getRows()), grid);
 
-        simpleGfxGrid = (SimpleGfxGrid) getGrid();
-
-        int x = simpleGfxGrid.columnToX(getCol());
-        int y = simpleGfxGrid.rowToY(getRow());
-
-        this.rectangle = new Rectangle(x, y,simpleGfxGrid.getCellSize(),simpleGfxGrid.getCellSize());
-
+        this.simpleGfxGrid = grid;
+        //this.rectangle = new Rectangle(grid.columnToX(super.getCol()),grid.rowToY(super.getRow()), grid.getCellSize(), grid.getCellSize() );
         show();
     }
 
@@ -37,51 +34,80 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
      * @param row position row
      * @param grid Simple graphics grid
      */
-    public SimpleGfxGridPosition(int col, int row, SimpleGfxGrid grid){
+    public SimpleGfxGridPosition(int col, int row, SimpleGfxGrid grid, Picture picture){
         super(col, row, grid);
 
-        simpleGfxGrid = (SimpleGfxGrid) getGrid();
-
-        int x = simpleGfxGrid.columnToX(col);
-        int y = simpleGfxGrid.rowToY(row);
-
-        this.rectangle = new Rectangle(x, y,simpleGfxGrid.getCellSize(),simpleGfxGrid.getCellSize());
-
+        this.col = col;
+        this.row = row;
+        this.simpleGfxGrid = grid;
+        System.out.println(grid.getCellSize());
+        this.rectangle = picture;//new Rectangle(grid.columnToX(col), grid.rowToY(row), grid.getCellSize(), grid.getCellSize());
         show();
     }
 
-    /**
-     * @see GridPosition#show()
-     */
+
     @Override
     public void show() {
-        this.rectangle.fill();
+        rectangle.draw();
     }
 
-    /**
-     * @see GridPosition#hide()
-     */
+
     @Override
     public void hide() {
-        this.rectangle.delete();
+        rectangle.delete();
     }
 
-    /**
-     * @see GridPosition#moveInDirection(GridDirection, int)
-     */
+
     @Override
     public void moveInDirection(GridDirection direction, int distance) {
 
-        int initialCol = getCol();
-        int initialRow = getRow();
 
-        super.moveInDirection(direction, distance);
+        int iniCol = getCol();
+        int iniRow = getRow();
 
-        int dx = simpleGfxGrid.columnToX(getCol()) - simpleGfxGrid.columnToX(initialCol);
-        int dy = simpleGfxGrid.rowToY(getRow()) - simpleGfxGrid.rowToY(initialRow);
-
-        this.rectangle.translate(dx,dy);
-
+        switch (direction) {
+            case RIGHT:
+                moveRight(distance);
+                rectangle.translate(simpleGfxGrid.columnToX(getCol()) - simpleGfxGrid.columnToX(iniCol), 0);
+                break;
+            case LEFT:
+                moveLeft(distance);
+                rectangle.translate(simpleGfxGrid.columnToX(getCol()) - simpleGfxGrid.columnToX(iniCol), 0);
+                break;
+            case UP:
+                moveUp(distance);
+                rectangle.translate(0, simpleGfxGrid.rowToY(getRow()) - simpleGfxGrid.rowToY(iniRow));
+                break;
+            case DOWN:
+                moveDown(distance);
+                rectangle.translate(0, simpleGfxGrid.rowToY(getRow()) - simpleGfxGrid.rowToY(iniRow));
+        }
     }
 
 
+
+    public void setColor(Picture color) {
+
+       /* switch (color){
+            case BLUE:
+                super.setColor(color);
+                rectangle.setColor(Color.BLUE);
+                break;
+            case RED:
+                super.setColor(color);
+                rectangle.setColor(Color.RED);
+                break;
+            case GREEN:
+                super.setColor(color);
+                rectangle.setColor(Color.GREEN);
+                break;
+            case MAGENTA:
+                super.setColor(color);
+                rectangle.setColor(Color.MAGENTA);*/
+        color.draw();
+
+
+
+    }
+
+}

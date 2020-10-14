@@ -1,6 +1,7 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.grid;
 
-import org.academiadecodigo.bootcamp.grid.position.GridPosition;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public interface Grid {
 
@@ -37,6 +38,6 @@ public interface Grid {
      * @param row   the position row
      * @return the new grid position
      */
-    public GridPosition makeGridPosition(int col, int row);
+    public GridPosition makeGridPosition(int col, int row, Picture picture);
 
 }

@@ -1,7 +1,7 @@
-package org.academiadecodigo.bootcamp.grid.position;
+package org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position;
 
-import org.academiadecodigo.bootcamp.grid.GridColor;
-import org.academiadecodigo.bootcamp.grid.GridDirection;
+
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridDirection;
 
 /**
  * A position on the grid that is capable of moving around

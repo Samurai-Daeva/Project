@@ -1,72 +1,93 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx;
 
-
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
-import org.academiadecodigo.bootcamp.grid.position.GridPosition;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class SimpleGfxGrid implements Grid {
 
     public static final int PADDING = 10;
-
-    private int cellSize = 15;
     private int cols;
     private int rows;
+    private int x;
+    private int y;
+    private int cellSize = 20;
 
-    private Rectangle field;
 
-    /**
-     * Simple graphics grid constructor with a certain number of rows and columns
-     *
-     * @param cols number of the columns
-     * @param rows number of rows
-     */
     public SimpleGfxGrid(int cols, int rows){
         this.cols = cols;
         this.rows = rows;
     }
 
     /**
-     * Initializes the field simple graphics rectangle and draws it
+     * @see Grid#init()
      */
     @Override
     public void init() {
-        this.field = new Rectangle(PADDING,PADDING, cols * cellSize, rows * cellSize);
-        this.field.draw();
+        Picture picture = new Picture(PADDING,PADDING,"game/resources/woodfloor.png");
+        Rectangle grid = new Rectangle(PADDING, PADDING, picture.getMaxX() - PADDING, picture.getMaxY() - PADDING);
+
+        grid.setColor(Color.BLACK);
+        grid.draw();
+        picture.draw();
     }
 
-    public void setCellSize(int cellSize) {
-        this.cellSize = cellSize;
-    }
-
-    public int getCellSize() {
-        return cellSize;
-    }
-
+    /**
+     * @see Grid#getCols()
+     */
     @Override
     public int getCols() {
         return this.cols;
     }
 
+    /**
+     * @see Grid#getRows()
+     */
     @Override
     public int getRows() {
         return this.rows;
     }
 
+    /**
+     * Obtains the width of the grid in pixels
+     * @return the width of the grid
+     */
     public int getWidth() {
-        return this.field.getWidth();
+        return getCellSize() * this.cols;
     }
 
+    /**
+     * Obtains the height of the grid in pixels
+     * @return the height of the grid
+     */
     public int getHeight() {
-        return this.field.getHeight();
+        return getCellSize() * this.rows;
     }
 
+    /**
+     * Obtains the grid X position in the SimpleGFX canvas
+     * @return the x position of the grid
+     */
     public int getX() {
-        return this.field.getX();
+        return PADDING;
     }
 
+    /**
+     * Obtains the grid Y position in the SimpleGFX canvas
+     * @return the y position of the grid
+     */
     public int getY() {
-        return this.field.getY();
+        return PADDING;
+    }
+
+    /**
+     * Obtains the pixel width and height of a grid position
+     * @return
+     */
+    public int getCellSize() {
+        return this.cellSize;
     }
 
     /**
@@ -74,15 +95,16 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public GridPosition makeGridPosition() {
+
         return new SimpleGfxGridPosition(this);
     }
 
-    /**
-     * @see Grid#makeGridPosition(int, int)
-     */
+
+
     @Override
-    public GridPosition makeGridPosition(int col, int row) {
-        return new SimpleGfxGridPosition(col, row, this);
+    public GridPosition makeGridPosition(int col, int row, Picture picture) {
+        GridPosition gridPosition = new SimpleGfxGridPosition(col,row,this, picture);
+        return gridPosition;
     }
 
     /**
@@ -91,7 +113,9 @@ public class SimpleGfxGrid implements Grid {
      * @return y pixel value
      */
     public int rowToY(int row) {
-        return PADDING + cellSize * row;
+
+        return getY() + (row * getCellSize());
+
     }
 
     /**
@@ -100,7 +124,8 @@ public class SimpleGfxGrid implements Grid {
      * @return x pixel value
      */
     public int columnToX(int column) {
-        return PADDING + cellSize * column;
-    }
+        return getX() + (column * getCellSize());
 
+
+    }
 }

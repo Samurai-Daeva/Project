@@ -3,23 +3,21 @@ package org.academiadecodigo.bitjs.game;
 import org.academiadecodigo.bitjs.game.gameobjects.Player;
 import org.academiadecodigo.bitjs.game.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.Field;
+import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridType;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Player player = new Player("Tofu");
-        Enemy[] enemies;
+        Game g = new Game(GridType.SIMPLE_GFX, 80, 25, 200);
 
-        Game game = new Game(player);
-        Field field = new Field("field");
-        field.init();
+        g.init();
+        //g.start();
 
-        enemies = game.sortEnemies();
 
-        for (int i = 0; i < enemies.length; i++) {
+        //Field field = new Field();
+        //field.init();
 
-            game.attack(player, enemies[i]);
-        }
+
     }
 }
