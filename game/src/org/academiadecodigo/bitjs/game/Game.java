@@ -16,14 +16,14 @@ public class Game {
 
 
     /**
-     * Graphical Car field
+     * Graphical field
      */
     private Grid grid;
 
     /**
-     * Container of Cars
+     * Container of Characters
      */
-    private Character[] cars;
+    private Character[] characters;
 
     private Player player;
 
@@ -40,9 +40,9 @@ public class Game {
     private CollisionDetector collisionDetector;
 
     /**
-     * Number of cars to manufacture
+     * Number of Characters to manufacture
      */
-    private int manufacturedCars = 20;
+    private int manufacturedCharacters = 1;
 
 
     /**
@@ -59,24 +59,22 @@ public class Game {
 
     }
 
-    /**
-     * Creates a bunch of cars and randomly puts them in the field
-     */
+
     public void init() {
 
         grid.init();
 
-        cars = new Character[manufacturedCars];
-        collisionDetector = new CollisionDetector(cars);
-        cars[0] = new Player(grid.makeGridPosition(0,0, picture),picture);
-        player = (Player) cars[0];
-        for (int i = 1; i < manufacturedCars; i++) {
+        characters = new Character[manufacturedCharacters];
+        collisionDetector = new CollisionDetector(characters);
+        characters[0] = new Player(grid.makeGridPosition(0,0, picture),picture);
+        player = (Player) characters[0];
+        for (int i = 1; i < manufacturedCharacters; i++) {
             //if(cars[i] instanceof Car) {
 
             // Car car = (Car) cars[i];
-            cars[i] = NPCFactory.getNewCharacter(grid);
-            cars[i].setCollisionDetector(collisionDetector);
-            cars[i].setGrid(grid);
+            characters[i] = NPCFactory.getNewCharacter(grid);
+            characters[i].setCollisionDetector(collisionDetector);
+            characters[i].setGrid(grid);
         }
     }
 
