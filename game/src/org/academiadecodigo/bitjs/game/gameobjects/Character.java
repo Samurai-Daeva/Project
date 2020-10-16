@@ -1,6 +1,5 @@
 package org.academiadecodigo.bitjs.game.gameobjects;
 
-import org.academiadecodigo.bitjs.game.CollisionDetector;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridDirection;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
@@ -12,7 +11,7 @@ public class Character {
 
     private boolean crashed = false;
 
-    protected CollisionDetector collisionDetector;
+    //protected CollisionDetector collisionDetector;
     protected GridDirection currentDirection;
 
     public Character(GridPosition pos){
@@ -27,9 +26,9 @@ public class Character {
         return pos;
     }
 
-    public void setCollisionDetector(CollisionDetector collisionDetector) {
+   /* public void setCollisionDetector(CollisionDetector collisionDetector) {
         this.collisionDetector = collisionDetector;
-    }
+    }*/
 
   /*  public void setDirectionChangeLevel(int directionChangeLevel) {
         this.directionChangeLevel = directionChangeLevel;

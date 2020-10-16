@@ -1,7 +1,6 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position;
 
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
-import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridColor;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridDirection;
 
 
@@ -11,7 +10,7 @@ public abstract class AbstractGridPosition implements GridPosition {
 
     private int col;
     private int row;
-    private GridColor color;
+   // private GridColor color;
     private Grid grid;
 
     /**
@@ -25,7 +24,7 @@ public abstract class AbstractGridPosition implements GridPosition {
         this.col = col;
         this.row = row;
         this.grid = grid;
-        this.color = GridColor.NOCOLOR;
+      //  this.color = GridColor.NOCOLOR;
     }
 
     public Grid getGrid() {
@@ -58,9 +57,27 @@ public abstract class AbstractGridPosition implements GridPosition {
         return row;
     }
 
-    /**
-     * @see GridPosition#getColor()
-     */
+
+    @Override
+    public void moveInDirection(GridDirection direction, int distance, int height, int width) {
+
+        switch (direction) {
+
+            case UP:
+                moveUp(distance);
+                break;
+            case DOWN:
+                moveDown(distance);
+                break;
+            case LEFT:
+                moveLeft(distance);
+                break;
+            case RIGHT:
+                moveRight(distance);
+                break;
+        }
+
+    }
 
 
 
@@ -104,7 +121,7 @@ public abstract class AbstractGridPosition implements GridPosition {
         return "GridPosition{" +
                 "col=" + col +
                 ", row=" + row +
-                ", getColor=" + color +
+                ", getColor=" + 
                 '}';
     }
 

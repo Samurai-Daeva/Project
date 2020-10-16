@@ -25,9 +25,12 @@ public class Game {
      */
     private Character[] characters;
 
-    private Player player;
+    private Picture picture = new Picture(10, 600, "game/resources/totodile.png");
 
-    private Picture picture = new Picture(0,0,"resources/player1.png");
+    //private Player player = new Player(grid.makeGridPosition(0,0, picture));
+    private Player player;
+    private int cols;
+    private int rows;
 
     /**
      * Animation delay
@@ -37,7 +40,6 @@ public class Game {
     /**
      * The collision detector
      */
-    private CollisionDetector collisionDetector;
 
     /**
      * Number of Characters to manufacture
@@ -47,34 +49,44 @@ public class Game {
 
     /**
      * Constructs a new game
-     * @param gridType which grid type to use
      * @param cols number of columns in the grid
      * @param rows number of rows in the grid
      * @param delay animation delay
      */
-    Game(GridType gridType, int cols, int rows, int delay) {
+    Game(int cols, int rows, int delay) {
 
-        grid = GridFactory.makeGrid(gridType, cols, rows);
+        //grid = GridFactory.makeGrid(cols, rows);
+        this.cols = cols;
+        this.rows = rows;
         this.delay = delay;
+
 
     }
 
 
     public void init() {
-
+        grid = GridFactory.makeGrid(cols, rows);
         grid.init();
+        player = new Player(grid.makeGridPosition(0,0, picture));
+
+        if(!player.isCodeUp()){
+
+        //this.player = new Player(grid.makeGridPosition(0,0, picture));
+
+
 
         characters = new Character[manufacturedCharacters];
-        collisionDetector = new CollisionDetector(characters);
-        characters[0] = new Player(grid.makeGridPosition(0,0, picture),picture);
+        characters[0] = this.player;
         player = (Player) characters[0];
         for (int i = 1; i < manufacturedCharacters; i++) {
-            //if(cars[i] instanceof Car) {
 
-            // Car car = (Car) cars[i];
             characters[i] = NPCFactory.getNewCharacter(grid);
-            characters[i].setCollisionDetector(collisionDetector);
             characters[i].setGrid(grid);
+            return;
+        }
+        }else{
+            System.out.println("is code up");
+            grid.init();
         }
     }
 

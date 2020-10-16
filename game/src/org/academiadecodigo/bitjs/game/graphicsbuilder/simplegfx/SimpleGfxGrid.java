@@ -14,11 +14,17 @@ public class SimpleGfxGrid implements Grid {
     private int x;
     private int y;
     private int cellSize = 20;
+    Picture firstScene;
+    Picture[] sceneries = new Picture[2];
+    //String[] sceneries = {"game/resources/Background.png", "game/resources/combatmodeback.png}"};
+    private int counter;
 
 
     public SimpleGfxGrid(int cols, int rows){
         this.cols = cols;
         this.rows = rows;
+        sceneries[0] = new Picture(PADDING,PADDING, "game/resources/Background.png");
+        sceneries[1] = new Picture(PADDING,PADDING, "game/resources/combatmodeback.png");
     }
 
     /**
@@ -26,12 +32,19 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public void init() {
-        Picture picture = new Picture(PADDING,PADDING,"game/resources/woodfloor.png");
-        Rectangle grid = new Rectangle(PADDING, PADDING, picture.getMaxX() - PADDING, picture.getMaxY() - PADDING);
-
-        grid.setColor(Color.BLACK);
-        grid.draw();
-        picture.draw();
+        if(counter < sceneries.length) {
+           //sceneries[0].delete();
+           // Picture picture = new Picture(PADDING, PADDING, sceneries[counter]);
+            Rectangle grid = new Rectangle(PADDING, PADDING, sceneries[counter].getMaxX() - PADDING, sceneries[counter].getMaxY() - PADDING);
+            System.out.println(counter);
+            grid.setColor(Color.BLACK);
+            grid.draw();
+            sceneries[counter].draw();
+            sceneries[0] = sceneries[1];
+            //this.firstScene = picture;
+           // counter++;
+        }
+        return;
     }
 
     /**
@@ -49,6 +62,7 @@ public class SimpleGfxGrid implements Grid {
     public int getRows() {
         return this.rows;
     }
+
 
     /**
      * Obtains the width of the grid in pixels
@@ -89,17 +103,6 @@ public class SimpleGfxGrid implements Grid {
     public int getCellSize() {
         return this.cellSize;
     }
-
-    /**
-     * @see Grid#makeGridPosition()
-     */
-    @Override
-    public GridPosition makeGridPosition() {
-
-        return new SimpleGfxGridPosition(this);
-    }
-
-
 
     @Override
     public GridPosition makeGridPosition(int col, int row, Picture picture) {

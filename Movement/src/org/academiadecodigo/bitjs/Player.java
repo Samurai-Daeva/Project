@@ -67,4 +67,5 @@ public class Player {
         player.translate(-10, 0);
         position.setCol(position.getCol() - 10);
     }
+
 }
