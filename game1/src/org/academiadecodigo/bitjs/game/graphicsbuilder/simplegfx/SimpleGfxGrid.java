@@ -24,7 +24,7 @@ public class SimpleGfxGrid implements Grid {
     public SimpleGfxGrid(int cols, int rows) {
         this.cols = cols;
         this.rows = rows;
-        sceneries[0] = new Picture(PADDING, PADDING, "resources/Background.png");
+        sceneries[0] = new Picture(PADDING, PADDING, "resources/woodfloor1.png");
         sceneries[1] = new Picture(PADDING, PADDING, "resources/combatmodeback.png");
         sceneries[2] = new Picture(PADDING, PADDING, "resources/combatmodeback1.png");
         sceneries[3] = new Picture(PADDING, PADDING, "resources/combatmodeback2.png");

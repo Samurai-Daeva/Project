@@ -25,7 +25,7 @@ public class Game {
      */
     private Character[] characters;
 
-    private Picture picture = new Picture(10, 600, "game/resources/totodile.png");
+    private Picture picture = new Picture(10, 600, "resources/totodile.png");
 
     //private Player player = new Player(grid.makeGridPosition(0,0, picture));
     private Player player;

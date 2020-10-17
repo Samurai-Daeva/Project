@@ -88,20 +88,20 @@ public class Movement implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         if (keyboardEvent.getKey() == up.getKey()){
-            if(player.getInitialRow() < 20)
+            if(player.getInitialRow() < -240)
                return;
                 player.moveUp();
 
         }
 
         if (keyboardEvent.getKey() == down.getKey()){
-            if (player.getInitialRow() > 700)
+            if (player.getInitialRow() > 430)
                 return;
             player.moveDown();
         }
 
         if (keyboardEvent.getKey() == right.getKey()){
-            if (player.getInitialCol() > 550)
+            if (player.getInitialCol() > 540)
                 return;
             player.moveRight();
         }

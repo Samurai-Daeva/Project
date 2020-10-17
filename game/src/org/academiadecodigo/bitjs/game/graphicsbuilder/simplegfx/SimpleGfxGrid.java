@@ -23,8 +23,8 @@ public class SimpleGfxGrid implements Grid {
     public SimpleGfxGrid(int cols, int rows){
         this.cols = cols;
         this.rows = rows;
-        sceneries[0] = new Picture(PADDING,PADDING, "game/resources/Background.png");
-        sceneries[1] = new Picture(PADDING,PADDING, "game/resources/combatmodeback.png");
+        sceneries[0] = new Picture(PADDING,PADDING, "resources/Background.png");
+        sceneries[1] = new Picture(PADDING,PADDING, "resources/combatmodeback.png");
     }
 
     /**

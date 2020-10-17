@@ -6,6 +6,7 @@ import org.academiadecodigo.bitjs.game.gameobjects.Character;
 import org.academiadecodigo.bitjs.game.gameobjects.Player;
 import org.academiadecodigo.bitjs.game.gameobjects.enemy.Enemy;
 import org.academiadecodigo.bitjs.game.gameobjects.npcs.NPCFactory;
+import org.academiadecodigo.bitjs.game.gameobjects.npcs.NPCType;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridFactory;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridType;
@@ -24,7 +25,7 @@ public class Game {
     private int delay = 200;
     private static int counter;
 
-    private int manufacturedCharacters = 1;
+    private int manufacturedCharacters = 8 ;
 
 
     public Game(int cols, int rows, int delay) {
@@ -46,11 +47,12 @@ public class Game {
             characters = new Character[manufacturedCharacters];
             characters[0] = this.player;
             player = (Player) characters[0];
-            for (int i = 1; i < manufacturedCharacters; i++) {
+            for (int i = 0; i < manufacturedCharacters; i++) {
 
                 characters[i] = NPCFactory.getNewCharacter(grid);
                 characters[i].setGrid(grid);
-                return;
+                NPCType.values()[i].getPicture().draw();
+                continue;
             }
         } else {
             System.out.println("is code up");
