@@ -1,5 +1,6 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx;
 
+import org.academiadecodigo.bitjs.game.gameobjects.Player;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -14,11 +15,13 @@ public class SimpleGfxGrid implements Grid {
     private int x;
     private int y;
     private int cellSize = 20;
-    Picture firstScene;
-    Picture[] sceneries = new Picture[7];
-    //String[] sceneries = {"game/resources/Background.png", "game/resources/combatmodeback.png}"};
+    private Picture[] sceneries = new Picture[17];
+   // private Picture start = new Picture(PADDING,PADDING,"resources/startmenu.png");
+
     private int counter;
-    private int regulator;
+   // private boolean start1;
+
+
 
 
     public SimpleGfxGrid(int cols, int rows) {
@@ -31,29 +34,43 @@ public class SimpleGfxGrid implements Grid {
         sceneries[4] = new Picture(PADDING, PADDING, "resources/combatmodeback3.png");
         sceneries[5] = new Picture(PADDING, PADDING, "resources/combatmodeback4.png");
         sceneries[6] = new Picture(PADDING, PADDING, "resources/combatmodeback5.png");
+        sceneries[7] = new Picture(PADDING, PADDING, "resources/combatmodeback6.png");
+        sceneries[8] = new Picture(PADDING, PADDING, "resources/combatmodeback18.png");
+        sceneries[9] = new Picture(PADDING, PADDING, "resources/combatmodeback9.png");
+        sceneries[10] = new Picture(PADDING, PADDING, "resources/combatmodeback11.png");
+        sceneries[11] = new Picture(PADDING, PADDING, "resources/combatmodeback12.png");
+        sceneries[12] = new Picture(PADDING, PADDING, "resources/combatmodeback13.png");
+        sceneries[13] = new Picture(PADDING, PADDING, "resources/combatmodeback14.png");
+        sceneries[14] = new Picture(PADDING, PADDING, "resources/combatmodeback15.png");
+        sceneries[15] = new Picture(PADDING, PADDING, "resources/combatmodeback16.png");
+        sceneries[16] = new Picture(PADDING, PADDING, "resources/combatmodeback17.png");
+
 
     }
 
+
+
     @Override
-    public void init() {
+    public void init(){
+
 
         if (counter < sceneries.length) {
             Rectangle grid = new Rectangle(PADDING, PADDING, sceneries[counter].getMaxX() - PADDING, sceneries[counter].getMaxY() - PADDING);
             System.out.println(counter);
             grid.setColor(Color.BLACK);
             grid.draw();
-            if (regulator % 2 != 0) {
-                sceneries[1].draw();
-                System.out.println("het");
-                regulator++;
-            } else {
-                sceneries[counter].draw();
-                System.out.println("hot");
-                counter++;
-            }
+
+            sceneries[counter].draw();
+            System.out.println("hot");
+            counter++;
+            System.out.println(counter);
+            return;
+
         }
         return;
     }
+
+
 
     @Override
     public int getCols() {
@@ -65,13 +82,6 @@ public class SimpleGfxGrid implements Grid {
         return this.rows;
     }
 
-    public int getWidth() {
-        return getCellSize() * this.cols;
-    }
-
-    public int getHeight() {
-        return getCellSize() * this.rows;
-    }
 
     public int getX() {
         return PADDING;
@@ -84,6 +94,13 @@ public class SimpleGfxGrid implements Grid {
     public int getCellSize() {
         return this.cellSize;
     }
+    public int getCounter(){
+        return counter;
+    }
+
+    /*public void setStart(boolean start) {
+        this.start1 = start;
+    }*/
 
     @Override
     public GridPosition makeGridPosition(int col, int row, Picture picture) {

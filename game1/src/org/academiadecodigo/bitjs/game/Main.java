@@ -1,7 +1,6 @@
 package org.academiadecodigo.bitjs.game;
 
-import org.academiadecodigo.bitjs.game.gameobjects.Player;
-import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridType;
+
 
 public class Main {
 

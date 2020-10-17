@@ -27,13 +27,16 @@ public class Player extends Character implements Damage, KeyboardHandler {
     private Movable movable;
     private Keyboard keyboard;
     private Picture playerPicture;
-    private Position position;
+    private Picture wrong = new Picture(10, 10, "resources/wrong.png");
+    private Picture talk1 = new Picture(250, 10, "resources/ballon.png");
+    private Picture talk2 = new Picture(500, 500, "resources/ballon.png");
+
     private GridPosition pos;
-    private SimpleGfxGrid grid ;
-    private SimpleGfxGridPosition gfxposition ;
+    private SimpleGfxGrid grid;
+    private SimpleGfxGridPosition gfxposition;
     private int initialCol = 0;
     private int initialRow = 200;
-  
+
     private Movement movement;
 
 
@@ -44,18 +47,18 @@ public class Player extends Character implements Damage, KeyboardHandler {
         this.health = 2000;
         this.isDead = false;
         this.damageCapacity = 300;
-        this.name = name;
+
 
         this.level1 = false;
         this.level2 = false;
         this.level3 = false;
         this.codeUp = false;
-        this.playerPicture= new Picture(10, 450, "resources/player2.png");
+        this.playerPicture = new Picture(10, 450, "resources/player2.png");
         this.grid = new SimpleGfxGrid(600, 750);
         this.gfxposition = new SimpleGfxGridPosition(0, 0, grid, playerPicture);
         this.movable = playerPicture;
 
-      
+
         init();
     }
 
@@ -65,26 +68,6 @@ public class Player extends Character implements Damage, KeyboardHandler {
         playerPicture.draw();
     }
 
-    public Picture getPlayerPicture() {
-        return playerPicture;
-    }
-
-    public boolean isCodeUp() {
-
-        return codeUp;
-    }
-
-    public boolean isLevel1(){
-        return level1;
-    }
-
-    public boolean isLevel2() {
-        return level2;
-    }
-
-    public boolean isLevel3() {
-        return level3;
-    }
 
     // method that decides the amount of damage taken by the player
     @Override
@@ -113,24 +96,136 @@ public class Player extends Character implements Damage, KeyboardHandler {
 
     }
 
-    public boolean isDamaged() {
 
-        return isDead;
+    @Override
+    public String toString() {
+        return this.name;
     }
 
-    public void setCodeUp(boolean codeUp) {
+    public void moveUp() {
 
-        this.codeUp = codeUp;
-        grid.init();
-    }
+        playerPicture.translate(0, -10);
 
-    public void setDead(boolean isDead) {
-
-        this.isDead = isDead;
+        initialRow -= 10;
+        System.out.println("Row " + initialRow);
 
     }
-    public void setMCFight(boolean mcFight){
-        this.MCFight= mcFight;
+
+    public void moveDown() {
+
+        playerPicture.translate(0, 10);
+        initialRow += 10;
+        System.out.println("Row " + initialRow);
+
+    }
+
+    public void moveRight() {
+
+        playerPicture.translate(10, 0);
+        initialCol += 10;
+        System.out.println("Col " + initialCol);
+
+    }
+
+    public void moveLeft() {
+
+        playerPicture.translate(-10, 0);
+        initialCol -= 10;
+        System.out.println("Col " + initialCol);
+
+    }
+
+    //usar em interact
+    public void pushTalk() {
+       // grid.setStart(true);
+        if (grid.getCounter() == 0 || grid.getCounter() == 1 || grid.getCounter() == 2 || grid.getCounter() == 3 || grid.getCounter() == 4 || grid.getCounter() == 5 || grid.getCounter() == 8 || grid.getCounter() == 13 || grid.getCounter() == 16) {
+            grid.init();
+        } else {
+            return;
+        }
+    }
+
+
+    //usar em swicht
+    public void move1() {
+        if (grid.getCounter() == 6) {
+            grid.init();
+        } else if (grid.getCounter() == 9) {
+            System.out.println("keypress1");
+            Game.interact();
+        } else if (grid.getCounter() == 7 || grid.getCounter() == 10 || grid.getCounter() == 12 || grid.getCounter() == 15) {
+            wrong.draw();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                System.out.println("something's wrong");
+            }
+
+            health -= 100;
+        } else {
+            return;
+        }
+    }
+
+    //usar em swicht
+    public void move2() {
+        if (grid.getCounter() == 7 || grid.getCounter() == 12) {
+            grid.init();
+        } else if (grid.getCounter() == 11) {
+            Game.interact();
+        } else if (grid.getCounter() == 6 || grid.getCounter() == 10 || grid.getCounter() == 15) {
+            wrong.draw();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                System.out.println("something's wrong");
+            }
+            // grid.init(5);
+            health -= 100;
+            System.out.println(health);
+        } else {
+            return;
+        }
+    }
+
+    //usar em swicht
+    public void move3() {
+        if (grid.getCounter() == 10) {
+            grid.init();
+        } else if (grid.getCounter() == 14) {
+            Game.interact();
+        } else if (grid.getCounter() == 6 || grid.getCounter() == 7 || grid.getCounter() == 15 || grid.getCounter() == 12) {
+            wrong.draw();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                System.out.println("something's wrong");
+            }
+            //  grid.init(10);
+            health -= 100;
+        } else {
+            return;
+        }
+    }
+
+    //usar em swicht
+    public void move4() {
+        if (grid.getCounter() == 15) {
+            grid.init();
+        } else if (grid.getCounter() == 17) {
+            Game.interact();
+        } else if (grid.getCounter() == 6 || grid.getCounter() == 10 || grid.getCounter() == 12 || grid.getCounter() == 7) {
+            wrong.draw();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                System.out.println("something's wrong");
+            }
+            // grid.init(15);
+            health -= 100;
+        } else {
+            return;
+        }
     }
 
     public int getInitialCol() {
@@ -149,89 +244,66 @@ public class Player extends Character implements Damage, KeyboardHandler {
         return this.health;
     }
 
-    @Override
-    public String toString() {
-        return this.name;
+    public Picture getTalk() {
+        return talk1;
     }
 
-    public void moveUp() {
-  
-        playerPicture.translate(0, -10);
-
-        initialRow -= 10;
-        System.out.println("Row " +initialRow);
-
+    public Picture getTalk2() {
+        return talk2;
     }
 
-    public void moveDown() {
-
-         playerPicture.translate(0,  10);
-         initialRow += 10;
-        System.out.println("Row "+ initialRow);
+    public SimpleGfxGrid getGrid() {
+        return grid;
 
     }
 
-    public void moveRight() {
+    public boolean isDamaged() {
 
-         playerPicture.translate(10, 0);
-         initialCol += 10;
-        System.out.println("Col " + initialCol);
+        return isDead;
+    }
+
+    public boolean isCodeUp() {
+
+        return codeUp;
+    }
+
+    public boolean isLevel1() {
+        return level1;
+    }
+
+    public boolean isLevel2() {
+        return level2;
+    }
+
+    public boolean isLevel3() {
+        return level3;
+    }
+
+    public void setCodeUp(boolean codeUp) {
+
+        this.codeUp = codeUp;
+        // grid.init();
+    }
+
+    public void setDead(boolean isDead) {
+
+        this.isDead = isDead;
 
     }
 
-    public void moveLeft() {
-
-         playerPicture.translate( - 10, 0);
-         initialCol -= 10;
-        System.out.println("Col " + initialCol);
-
+    public void setLevel1(boolean level1) {
+        this.level1 = level1;
     }
 
-    //usar em interact
-    public void pushTalk() {
-        playerPicture.translate(10, 0);
-        position.setCol(position.getCol() + 10);
+    public void setLevel2(boolean level2) {
+        this.level2 = level2;
     }
 
-    //usar abrir menu
-    public void pushMenu() {
-        playerPicture.translate(-10, 0);
-        position.setCol(position.getCol() - 10);
+    public void setLevel3(boolean level3) {
+        this.level3 = level3;
     }
 
-    //usar em swicht
-    public void move1() {
-        System.out.println("keypress1");
-     Game.interact();
+    public void setMCFight(boolean mcFight) {
+        this.MCFight = mcFight;
     }
-
-    //usar em swicht
-    public void move2() {
-        if(MCFight && !level1){
-            return;
-        }else if(MCFight && level1){
-            Game.interact();
-        } return;
-    }
-
-    //usar em swicht
-    public void move3() {
-        if(MCFight && !level2){
-            return;
-        }else if(MCFight && level2){
-            Game.interact();
-        } return;
-
-    }
-
-    //usar em swicht
-    public void move4() {
-        if(MCFight && !level3){
-            return;
-        }else if(MCFight && level3){
-            Game.interact();
-        } return;
-
-    }
-
 }

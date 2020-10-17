@@ -5,18 +5,18 @@ import org.academiadecodigo.bitjs.game.battle.AttackType;
 import org.academiadecodigo.bitjs.game.gameobjects.Character;
 import org.academiadecodigo.bitjs.game.gameobjects.Player;
 import org.academiadecodigo.bitjs.game.gameobjects.enemy.Enemy;
+import org.academiadecodigo.bitjs.game.gameobjects.enemy.EnemyType;
 import org.academiadecodigo.bitjs.game.gameobjects.npcs.NPCFactory;
 import org.academiadecodigo.bitjs.game.gameobjects.npcs.NPCType;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridFactory;
-import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
 
-    private Grid grid;
+    private static Grid grid;
     private Character[] characters;
-    private Picture picture = new Picture(10, 600, "resources/totodile.png");
+    private static Picture picture = new Picture(10, 10, "resources/YouWin.png");
     private static Player player;
     private static Interaction interaction;
     private static Enemy[] enemies;
@@ -60,45 +60,54 @@ public class Game {
         }
     }
 
-    public void start() throws InterruptedException {
 
-        while (true) {
-
-            // Pause for a while
-            Thread.sleep(delay);
-/*
-            player.pressDown();
-            player.pressLeft();
-            player.pressRight();
-            player.pressUp();
-
- */
-            //moveAllCars();
-
-        }
-
-    }
 
     public static void interact() {
 
 
-
+        if (counter < EnemyType.values().length) {
             if (player.isLevel1()) {
-                interaction.attack(player, enemies[counter], AttackType.ATTACK1.getDamage(), enemies[counter].getDamageCapacity());
+                if (!(enemies[counter].isDamaged())) {
+                    interaction.attack(player, enemies[counter], AttackType.ATTACK1.getDamage(), enemies[counter].getDamageCapacity());
+                    System.out.println(enemies[counter] + " " + counter);
+                    return;
+                }
+                player.setLevel2(true);
+                player.getGrid().init();
                 counter++;
 
-            }
-            if (player.isLevel2()) {
-                interaction.attack(player, enemies[counter], AttackType.ATTACK2.getDamage(), enemies[counter].getDamageCapacity());
+            } else if (player.isLevel2()) {
+                if (!(enemies[counter].isDamaged())) {
+                    interaction.attack(player, enemies[counter], AttackType.ATTACK2.getDamage(), enemies[counter].getDamageCapacity());
+                    System.out.println(enemies[counter] + " " + counter);
+                    return;
+                }
+                player.setLevel3(true);
+                player.getGrid().init();
                 counter++;
-            }
-            if (player.isLevel3()) {
-                interaction.attack(player, enemies[counter], AttackType.ATTACK3.getDamage(), enemies[counter].getDamageCapacity());
-                counter++;
-            }
-         interaction.attack(player, enemies[counter], player.getDamageCapacity(), enemies[counter].getDamageCapacity());
-            counter++;
+            } else if (player.isLevel3()) {
+                if (!(enemies[counter].isDamaged())) {
+                    interaction.attack(player, enemies[counter], AttackType.ATTACK3.getDamage(), enemies[counter].getDamageCapacity());
 
-}
+                    System.out.println(enemies[counter] + " " + counter);
+                    return;
+                }
+
+            } else {
+                if (!(enemies[counter].isDamaged())) {
+                    interaction.attack(player, enemies[counter], player.getDamageCapacity(), enemies[counter].getDamageCapacity());
+                    System.out.println(enemies[counter] + " " + counter);
+                    return;
+                } else {
+                    player.setLevel1(true);
+                    player.getGrid().init();
+                    counter++;
+                }
+            }
+
+        }else {
+            picture.draw();
+        }
+    }
 
 }

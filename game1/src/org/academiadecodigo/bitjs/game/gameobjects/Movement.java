@@ -118,26 +118,37 @@ public class Movement implements KeyboardHandler {
         }
 
         if (keyboardEvent.getKey() == space.getKey()){
-            player.setCodeUp(true);
-            System.out.println("fff");
+            if (player.getInitialCol() == 300 && player.getInitialRow() == 10) {
+                player.setCodeUp(true);
+                System.out.println("fff");
+                player.pushTalk();
+            } else if (player.getInitialCol() == 270 && player.getInitialRow() == -160){
+                player.getTalk().draw();
+            }else if (player.getInitialCol() == 400 && player.getInitialRow() == 240) {
+                player.getTalk2().draw();
+            } else {
+                return;
+            }
         }
 
         if (keyboardEvent.getKey() == key_1.getKey()){
-
-            player.move1();
+            if (player.getInitialCol() == 300 && player.getInitialRow() == 10)
+                player.move1();
         }
 
         if (keyboardEvent.getKey() == key_2.getKey()){
-            player.move2();
+            if (player.getInitialCol() == 300 && player.getInitialRow() == 10)
+                player.move2();
         }
 
         if (keyboardEvent.getKey() == key_3.getKey()){
-
-            player.move3();
+            if (player.getInitialCol() == 300 && player.getInitialRow() == 10)
+                player.move3();
         }
 
         if (keyboardEvent.getKey() == key_4.getKey()){
-            player.move4();
+            if (player.getInitialCol() == 300 && player.getInitialRow() == 10)
+                player.move4();
         }
 
     }

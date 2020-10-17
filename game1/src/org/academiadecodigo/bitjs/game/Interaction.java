@@ -10,11 +10,10 @@ public class Interaction {
 
     private Player player;
     private Enemy[] enemies;
-    private boolean complete;
-    private int counter;
+
 
     public Interaction(Player player) {
-        this.enemies = new Enemy[9];
+        this.enemies = new Enemy[EnemyType.values().length];
         this.player = player;
     }
 
@@ -23,15 +22,16 @@ public class Interaction {
     public Enemy[] sortEnemies() {
 
         EnemyFactory enemyFactory = new EnemyFactory();
-        int counter = 1;
+        int counter = 0;
 
-        for (int i = 1; i < enemies.length; i++) {
+        for (int i = 0; i < enemies.length; i++) {
 
-            enemies[0] = enemyFactory.createEnemy(EnemyType.values()[0]);
+
 
             if (i % 2 != 0) {
 
-                enemies[i] = enemyFactory.createEnemy(EnemyType.values()[0]);
+                enemies[i] = enemyFactory.createEnemy(EnemyType.values()[counter]);
+                counter++;
 
             } else {
 
