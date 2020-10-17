@@ -47,7 +47,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
         this.level2 = false;
         this.level3 = false;
         this.codeUp = false;
-        this.playerPicture= new Picture(0, 200, "game/resources/totodile.png");
+        this.playerPicture= new Picture(0, 200, "resources/totodile.png");
         this.grid = new SimpleGfxGrid(600, 750);
         this.gfxposition = new SimpleGfxGridPosition(0, 0, grid, playerPicture);
         this.movable = playerPicture;
