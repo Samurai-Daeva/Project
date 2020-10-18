@@ -61,11 +61,6 @@ public class Movement implements KeyboardHandler {
         space.setKey(KeyboardEvent.KEY_SPACE);
         keyboard.addEventListener(space);
 
-        key_I = new KeyboardEvent();
-        key_I.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        key_I.setKey(KeyboardEvent.KEY_I);
-        keyboard.addEventListener(key_I);
-
         key_1 = new KeyboardEvent();
         key_1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         key_1.setKey(KeyboardEvent.KEY_1);
@@ -94,34 +89,32 @@ public class Movement implements KeyboardHandler {
             lose.play(true);
             return;
         }
+        if(!player.isCodeUp()) {
+            if (keyboardEvent.getKey() == up.getKey()) {
+              if (player.getInitialRow() < -240)
+                  return;
+              player.moveUp();
+         }
 
-        if (keyboardEvent.getKey() == up.getKey()){
-            if(player.getInitialRow() < -240)
-               return;
-                player.moveUp();
-        }
+            if (keyboardEvent.getKey() == down.getKey()) {
+         if (player.getInitialRow() > 430)
+            return;
+        player.moveDown();
+    }
 
-        if (keyboardEvent.getKey() == down.getKey()){
-            if (player.getInitialRow() > 430)
-                return;
-            player.moveDown();
-        }
+    if (keyboardEvent.getKey() == right.getKey()) {
+        if (player.getInitialCol() > 540)
+            return;
+        player.moveRight();
+    }
 
-        if (keyboardEvent.getKey() == right.getKey()){
-            if (player.getInitialCol() > 540)
-                return;
-            player.moveRight();
-        }
+    if (keyboardEvent.getKey() == left.getKey()) {
+        if (player.getInitialCol() < 20)
+            return;
+        player.moveLeft();
+    }
+}
 
-        if (keyboardEvent.getKey() == left.getKey()){
-            if (player.getInitialCol() < 20)
-                return;
-            player.moveLeft();
-        }
-
-        if (keyboardEvent.getKey() == key_I.getKey()){
-            player.pushTalk();
-        }
 
         if (keyboardEvent.getKey() == space.getKey()){
             if (player.getInitialCol() == 300 && player.getInitialRow() == 10) {

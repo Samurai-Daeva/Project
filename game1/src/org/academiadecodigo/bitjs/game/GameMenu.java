@@ -12,6 +12,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
         private KeyboardEvent key_Q;
         private KeyboardEvent key_I;
+        private boolean isOn;
 
         private Game game;
 
@@ -50,9 +51,13 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
                 System.exit(1);
 
             }else {
-
-                game.init();
-                menuMusic.close();
+                if(isOn){
+                    return;
+                } else {
+                    isOn = true;
+                    game.init();
+                    menuMusic.close();
+                }
             }
         }
 

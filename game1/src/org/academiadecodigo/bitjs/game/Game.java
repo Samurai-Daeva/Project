@@ -108,6 +108,7 @@ public class Game {
                 }
             }
         } else {
+            player.getComputerAmbience().close();
             picture.draw();
             win.play(true);
         }

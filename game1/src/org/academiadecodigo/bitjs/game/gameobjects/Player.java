@@ -55,7 +55,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
         super(pos);
         this.pos = pos;
         this.keyboard = new Keyboard(this);
-        this.health = 1000;
+        this.health = 1500;
         this.isDead = false;
         this.damageCapacity = 300;
         this.level1 = false;
@@ -85,6 +85,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
                 this.health -= damageCapacity;
 
                 if(this.health <=0){
+                    computerAmbience.close();
                     setDead(true);
                     codeUp = false;
                 }
@@ -162,8 +163,9 @@ public class Player extends Character implements Damage, KeyboardHandler {
             }
 
             if(health <= 0){
-                setDead(true);
                 computerAmbience.close();
+                setDead(true);
+
             }
 
             else{
@@ -191,14 +193,14 @@ public class Player extends Character implements Damage, KeyboardHandler {
             }
 
             if(health <= 0){
-                setDead(true);
                 computerAmbience.close();
+                setDead(true);
+
             }
 
             else{
                 health -= 100;
             }
-            System.out.println(health);
 
         } else {
             return;
@@ -223,8 +225,9 @@ public class Player extends Character implements Damage, KeyboardHandler {
             }
 
             if(health <= 0){
-                setDead(true);
                 computerAmbience.close();
+                setDead(true);
+
             }
             else{
                 health -= 100;
@@ -253,8 +256,9 @@ public class Player extends Character implements Damage, KeyboardHandler {
             }
 
             if(health <= 0){
-                setDead(true);
                 computerAmbience.close();
+                setDead(true);
+
             }
 
             else{
@@ -336,5 +340,9 @@ public class Player extends Character implements Damage, KeyboardHandler {
 
     public void setMCFight(boolean mcFight) {
         this.MCFight = mcFight;
+    }
+
+    public Sound getComputerAmbience() {
+        return computerAmbience;
     }
 }
