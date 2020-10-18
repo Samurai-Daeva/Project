@@ -4,13 +4,14 @@ import org.academiadecodigo.bitjs.game.Game;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx.SimpleGfxGrid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx.SimpleGfxGridPosition;
+import org.academiadecodigo.bitjs.game.sound.src.org.academiadecodigo.bootcamp.Sound;
 import org.academiadecodigo.simplegraphics.graphics.Movable;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.bitjs.game.battle.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.Position;
+
 
 
 public class Player extends Character implements Damage, KeyboardHandler {
@@ -30,6 +31,11 @@ public class Player extends Character implements Damage, KeyboardHandler {
     private Picture wrong = new Picture(10, 10, "resources/wrong.png");
     private Picture talk1 = new Picture(250, 10, "resources/ballon.png");
     private Picture talk2 = new Picture(500, 500, "resources/ballon.png");
+    private Sound ambience = new Sound("/resources/soundresources/roommusic.wav");
+    private Sound computerAmbience = new Sound("/resources/soundresources/computer.wav");
+
+
+
 
     private GridPosition pos;
     private SimpleGfxGrid grid;
@@ -66,6 +72,8 @@ public class Player extends Character implements Damage, KeyboardHandler {
         movement = new Movement(this);
         movement.init();
         playerPicture.draw();
+        ambience.play(true);
+        ambience.setLoop(10);
     }
 
 
@@ -162,6 +170,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
             }
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
             else{
                 health -= 100;
@@ -187,6 +196,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
             // grid.init(15);
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
             else{
                 health -= 100;
@@ -210,9 +220,10 @@ public class Player extends Character implements Damage, KeyboardHandler {
             } catch (InterruptedException e) {
                 System.out.println("something's wrong");
             }
-            //  grid.init(10);
+
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
             else{
                 health -= 100;
@@ -238,6 +249,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
             }
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
             else{
                 health -= 100;
@@ -299,9 +311,11 @@ public class Player extends Character implements Damage, KeyboardHandler {
     }
 
     public void setCodeUp(boolean codeUp) {
-
+        ambience.close();
+        computerAmbience.play(true);
+        computerAmbience.setLoop(10);
         this.codeUp = codeUp;
-        // grid.init();
+
     }
 
     public void setDead(boolean isDead) {

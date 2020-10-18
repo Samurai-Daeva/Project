@@ -16,10 +16,10 @@ public class SimpleGfxGrid implements Grid {
     private int y;
     private int cellSize = 20;
     private Picture[] sceneries = new Picture[17];
-   // private Picture start = new Picture(PADDING,PADDING,"resources/startmenu.png");
+
 
     private int counter;
-   // private boolean start1;
+
 
 
 
