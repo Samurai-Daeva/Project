@@ -20,7 +20,7 @@ public class Movement implements KeyboardHandler {
     private KeyboardEvent key_2;
     private KeyboardEvent key_3;
     private KeyboardEvent key_4;
-    private Picture picture1 = new Picture(10, 10, "resources/youlose.png");
+    private Picture picture1 = new Picture(10, 10, "resources/you_lose.png");
 
     public Movement(Player player) {
         this.player = player;

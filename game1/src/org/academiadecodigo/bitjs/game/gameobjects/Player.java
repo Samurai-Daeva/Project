@@ -160,8 +160,12 @@ public class Player extends Character implements Damage, KeyboardHandler {
             } catch (InterruptedException e) {
                 System.out.println("something's wrong");
             }
-
-            health -= 100;
+            if(health <= 0){
+                setDead(true);
+            }
+            else{
+                health -= 100;
+            }
         } else {
             return;
         }
@@ -180,8 +184,13 @@ public class Player extends Character implements Damage, KeyboardHandler {
             } catch (InterruptedException e) {
                 System.out.println("something's wrong");
             }
-            // grid.init(5);
-            health -= 100;
+            // grid.init(15);
+            if(health <= 0){
+                setDead(true);
+            }
+            else{
+                health -= 100;
+            }
             System.out.println(health);
         } else {
             return;
@@ -202,7 +211,13 @@ public class Player extends Character implements Damage, KeyboardHandler {
                 System.out.println("something's wrong");
             }
             //  grid.init(10);
-            health -= 100;
+            if(health <= 0){
+                setDead(true);
+            }
+            else{
+                health -= 100;
+            }
+
         } else {
             return;
         }
@@ -221,8 +236,12 @@ public class Player extends Character implements Damage, KeyboardHandler {
             } catch (InterruptedException e) {
                 System.out.println("something's wrong");
             }
-            // grid.init(15);
-            health -= 100;
+            if(health <= 0){
+                setDead(true);
+            }
+            else{
+                health -= 100;
+            }
         } else {
             return;
         }
