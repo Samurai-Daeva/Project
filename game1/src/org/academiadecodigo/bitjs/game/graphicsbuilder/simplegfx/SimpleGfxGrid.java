@@ -1,6 +1,5 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx;
 
-import org.academiadecodigo.bitjs.game.gameobjects.Player;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -12,17 +11,10 @@ public class SimpleGfxGrid implements Grid {
     public static final int PADDING = 10;
     private int cols;
     private int rows;
-    private int x;
-    private int y;
     private int cellSize = 20;
-    private Picture[] sceneries = new Picture[17];
-   // private Picture start = new Picture(PADDING,PADDING,"resources/startmenu.png");
-
     private int counter;
-   // private boolean start1;
 
-
-
+    private Picture[] sceneries = new Picture[17];
 
     public SimpleGfxGrid(int cols, int rows) {
         this.cols = cols;
@@ -45,32 +37,30 @@ public class SimpleGfxGrid implements Grid {
         sceneries[15] = new Picture(PADDING, PADDING, "resources/combatmodeback16.png");
         sceneries[16] = new Picture(PADDING, PADDING, "resources/combatmodeback17.png");
 
-
     }
-
-
 
     @Override
     public void init(){
-
-
         if (counter < sceneries.length) {
-            Rectangle grid = new Rectangle(PADDING, PADDING, sceneries[counter].getMaxX() - PADDING, sceneries[counter].getMaxY() - PADDING);
-            System.out.println(counter);
+            Rectangle grid = new Rectangle(PADDING, PADDING, sceneries[counter].getMaxX() - PADDING,
+        sceneries[counter].getMaxY() - PADDING);
+
             grid.setColor(Color.BLACK);
             grid.draw();
 
             sceneries[counter].draw();
-            System.out.println("hot");
             counter++;
-            System.out.println(counter);
             return;
 
         }
         return;
     }
 
-
+    @Override
+    public GridPosition makeGridPosition(int col, int row, Picture picture) {
+        GridPosition gridPosition = new SimpleGfxGridPosition(col, row, this, picture);
+        return gridPosition;
+    }
 
     @Override
     public int getCols() {
@@ -82,41 +72,7 @@ public class SimpleGfxGrid implements Grid {
         return this.rows;
     }
 
-
-    public int getX() {
-        return PADDING;
-    }
-
-    public int getY() {
-        return PADDING;
-    }
-
-    public int getCellSize() {
-        return this.cellSize;
-    }
     public int getCounter(){
         return counter;
-    }
-
-    /*public void setStart(boolean start) {
-        this.start1 = start;
-    }*/
-
-    @Override
-    public GridPosition makeGridPosition(int col, int row, Picture picture) {
-        GridPosition gridPosition = new SimpleGfxGridPosition(col, row, this, picture);
-        return gridPosition;
-    }
-
-    public int rowToY(int row) {
-
-        return getY() + (row * getCellSize());
-
-    }
-
-    public int columnToX(int column) {
-        return getX() + (column * getCellSize());
-
-
     }
 }

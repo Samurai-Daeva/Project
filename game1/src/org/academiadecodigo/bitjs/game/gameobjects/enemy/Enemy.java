@@ -5,38 +5,34 @@ import org.academiadecodigo.bitjs.game.battle.Damage;
 public class Enemy implements Damage {
 
     private int health;
-    private boolean isDead;
     private int damageCapacity;
 
-    //method that decides the amount of damage taken by the enemy
-@Override
+    private boolean isDead;
+
+    @Override
     public void damage(int damageCapacity){
         if(health >= 0) {
             health -= damageCapacity;
-        } else {
-            setDead(true);
+
+            if(health <= 0){
+                setDead(true);
+            }
         }
     }
 
-
+    @Override
     public boolean isDamaged(){
-
         return isDead;
     }
 
     public void setDead(boolean isDead){
-
         this.isDead = isDead;
-
     }
 
     public int getHealth(){
         return this.health;
     }
 
-    public void setDamageCapacity(int damageCapacity) {
-        this.damageCapacity = damageCapacity;
-    }
     public void setHealth(int health){
         this.health = health;
     }
@@ -45,12 +41,7 @@ public class Enemy implements Damage {
         return damageCapacity;
     }
 
-    @Override
-    public String toString() {
-        return "Enemy{" +
-                "health=" + health +
-                ", isDead=" + isDead +
-                ", damageCapacity=" + damageCapacity +
-                '}';
+    public void setDamageCapacity(int damageCapacity) {
+        this.damageCapacity = damageCapacity;
     }
 }

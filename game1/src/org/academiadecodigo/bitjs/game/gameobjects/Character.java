@@ -6,13 +6,11 @@ import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPositio
 
 public class Character {
 
-    private GridPosition pos;
     private Grid grid;
 
-    private boolean crashed = false;
+    private GridPosition pos;
 
-    //protected CollisionDetector collisionDetector;
-    protected GridDirection currentDirection;
+    private boolean crashed = false;
 
     public Character(GridPosition pos){
         this.pos = pos;
@@ -20,58 +18,5 @@ public class Character {
 
     public void setGrid(Grid grid) {
         this.grid = grid;
-    }
-
-    public GridPosition getPos() {
-        return pos;
-    }
-
-   /* public void setCollisionDetector(CollisionDetector collisionDetector) {
-        this.collisionDetector = collisionDetector;
-    }*/
-
-  /*  public void setDirectionChangeLevel(int directionChangeLevel) {
-        this.directionChangeLevel = directionChangeLevel;
-    }*/
-
-    public boolean isCrashed() {
-        return crashed;
-    }
-
-    /**
-     * Sets the car into a crashed state
-     */
-    public void crash() {
-
-        this.crashed = true;
-        // pos.setColor(GridColor.RED);
-
-    }
-    public boolean isHittingWall() {
-
-        switch (currentDirection) {
-            case LEFT:
-                if (getPos().getCol() == 0) {
-                    return true;
-                }
-                break;
-            case RIGHT:
-                if (getPos().getCol() == grid.getCols() - 1) {
-                    return true;
-                }
-                break;
-            case UP:
-                if (getPos().getRow() == 0) {
-                    return true;
-                }
-                break;
-            case DOWN:
-                if (getPos().getRow() == grid.getRows() - 1) {
-                    return true;
-                }
-        }
-
-        return false;
-
     }
 }
