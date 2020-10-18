@@ -1,73 +1,16 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position;
 
-
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridDirection;
 
-/**
- * A position on the grid that is capable of moving around
- */
 public interface GridPosition {
+    int getCol();
 
-    /**
-     * Gets the position column in the grid
-     *
-     * @return the position column
-     */
-    public int getCol();
+    int getRow();
 
-    /**
-     * Gets the position row in the grid
-     *
-     * @return the position row
-     */
-    public int getRow();
+    void setPos(int col, int row);
 
-    /**
-     * Updates the position column and row
-     *
-     * @param col the new position column
-     * @param row the new position row
-     */
-    public void setPos(int col, int row);
+    void show();
 
-    /**
-     * Gets the position color
-     *
-     * @return the position color
-     */
-
-
-    /**
-     * Changes the color of this grid position
-     *
-     * @param color the new position
-     */
-
-
-    /**
-     * Displays the position in the grid
-     */
-    public void show();
-
-    /**
-     * Hides the position in the grid
-     */
-    public void hide();
-
-    /**
-     * Moves this grid position towards a specified direction
-     *
-     * @param direction the direction to move to
-     * @param distance  the number of positions to move
-     */
-    public void moveInDirection(GridDirection direction, int distance, int height, int width);
-
-    /**
-     * Tests equality with another position
-     *
-     * @param position the position to test against
-     * @return true if positions are equal
-     */
-    public boolean equals(GridPosition position);
+    void moveInDirection(GridDirection direction, int distance, int height, int width);
 
 }

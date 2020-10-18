@@ -2,8 +2,10 @@ package org.academiadecodigo.bitjs.game.battle;
 
 public interface Damage {
 
-    void damage(int a);
+    void damage(int damage);
+
     boolean isDamaged();
+
 }
 
 

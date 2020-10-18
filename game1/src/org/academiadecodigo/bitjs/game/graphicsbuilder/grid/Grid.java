@@ -1,20 +1,14 @@
 package org.academiadecodigo.bitjs.game.graphicsbuilder.grid;
 
-
-import org.academiadecodigo.bitjs.game.gameobjects.Player;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public interface Grid {
+    void init();
 
+    int getCols();
 
-    public void init();
+    int getRows();
 
-
-    public int getCols();
-
-    public int getRows();
-
-    public GridPosition makeGridPosition(int col, int row, Picture picture);
-
+    GridPosition makeGridPosition(int col, int row, Picture picture);
 }

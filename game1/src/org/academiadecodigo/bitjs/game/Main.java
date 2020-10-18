@@ -1,16 +1,11 @@
 package org.academiadecodigo.bitjs.game;
 
-
-
-
 public class Main {
 
     public static void main(String[] args) {
 
-
-        Menuu menu = new Menuu();
+        GameMenu menu = new GameMenu();
         menu.init();
-
 
     }
 }

@@ -10,23 +10,23 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Movement implements KeyboardHandler {
 
     private Player player;
+
     private KeyboardEvent up;
     private KeyboardEvent down;
     private KeyboardEvent right;
     private KeyboardEvent left;
     private KeyboardEvent space;
-    //esta key menu será o 0
-    private KeyboardEvent esc;
+    private KeyboardEvent key_I;
     private KeyboardEvent key_1;
     private KeyboardEvent key_2;
     private KeyboardEvent key_3;
     private KeyboardEvent key_4;
+
     private Picture picture1 = new Picture(10, 10, "resources/you_lose.png");
     private static Sound lose = new Sound("/resources/soundresources/lose.wav");
 
     public Movement(Player player) {
         this.player = player;
-
     }
 
     public void init(){
@@ -34,7 +34,6 @@ public class Movement implements KeyboardHandler {
     }
 
     private void bootstrap(){
-
         Keyboard keyboard = new Keyboard(this);
 
         up = new KeyboardEvent();
@@ -62,10 +61,10 @@ public class Movement implements KeyboardHandler {
         space.setKey(KeyboardEvent.KEY_SPACE);
         keyboard.addEventListener(space);
 
-        esc = new KeyboardEvent();
-        esc.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        esc.setKey(KeyboardEvent.KEY_0);
-        keyboard.addEventListener(esc);
+        key_I = new KeyboardEvent();
+        key_I.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        key_I.setKey(KeyboardEvent.KEY_I);
+        keyboard.addEventListener(key_I);
 
         key_1 = new KeyboardEvent();
         key_1.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -100,7 +99,6 @@ public class Movement implements KeyboardHandler {
             if(player.getInitialRow() < -240)
                return;
                 player.moveUp();
-
         }
 
         if (keyboardEvent.getKey() == down.getKey()){
@@ -121,20 +119,21 @@ public class Movement implements KeyboardHandler {
             player.moveLeft();
         }
 
-        if (keyboardEvent.getKey() == esc.getKey()){
-
+        if (keyboardEvent.getKey() == key_I.getKey()){
             player.pushTalk();
         }
 
         if (keyboardEvent.getKey() == space.getKey()){
             if (player.getInitialCol() == 300 && player.getInitialRow() == 10) {
                 player.setCodeUp(true);
-                System.out.println("fff");
                 player.pushTalk();
+
             } else if (player.getInitialCol() == 270 && player.getInitialRow() == -160){
                 player.getTalk().draw();
+
             }else if (player.getInitialCol() == 400 && player.getInitialRow() == 240) {
                 player.getTalk2().draw();
+
             } else {
                 return;
             }
@@ -164,7 +163,6 @@ public class Movement implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-
     }
     public static void closeSound(){
         lose.close();
