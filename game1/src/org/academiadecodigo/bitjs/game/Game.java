@@ -17,6 +17,7 @@ public class Game {
     private static Grid grid;
     private Character[] characters;
     private static Picture picture = new Picture(10, 10, "resources/YouWin.png");
+
     private static Player player;
     private static Interaction interaction;
     private static Enemy[] enemies;
@@ -63,7 +64,6 @@ public class Game {
 
 
     public static void interact() {
-
 
         if (counter < EnemyType.values().length) {
             if (player.isLevel1()) {

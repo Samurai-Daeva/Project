@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Movement implements KeyboardHandler {
 
@@ -19,6 +20,7 @@ public class Movement implements KeyboardHandler {
     private KeyboardEvent key_2;
     private KeyboardEvent key_3;
     private KeyboardEvent key_4;
+    private Picture picture1 = new Picture(10, 10, "resources/youlose.png");
 
     public Movement(Player player) {
         this.player = player;
@@ -86,6 +88,10 @@ public class Movement implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
+        if(player.isDamaged()){
+            picture1.draw();
+            return;
+        }
 
         if (keyboardEvent.getKey() == up.getKey()){
             if(player.getInitialRow() < -240)

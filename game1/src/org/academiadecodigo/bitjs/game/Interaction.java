@@ -60,7 +60,7 @@ public class Interaction {
                     System.out.println(enemyDamage);
                 } else {
                     player.setMCFight(true);
-                    if (Math.random() < 0.2) {
+                    if (Math.random() < 0.3) {
                         player.damage(enemyDamage);
                         System.out.println(player.getDamageCapacity());
                     }

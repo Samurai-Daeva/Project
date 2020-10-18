@@ -44,7 +44,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
         super(pos);
         this.pos = pos;
         this.keyboard = new Keyboard(this);
-        this.health = 2000;
+        this.health = 1000;
         this.isDead = false;
         this.damageCapacity = 300;
 
