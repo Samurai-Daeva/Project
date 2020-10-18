@@ -9,6 +9,7 @@ import org.academiadecodigo.bitjs.game.gameobjects.npcs.NPCFactory;
 import org.academiadecodigo.bitjs.game.gameobjects.npcs.NPCType;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.Grid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.GridFactory;
+import org.academiadecodigo.bitjs.game.sound.src.org.academiadecodigo.bootcamp.Sound;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
@@ -24,6 +25,8 @@ public class Game {
     private Character[] characters;
 
     private static Picture picture = new Picture(10, 10, "resources/YouWin.png");
+    private static Sound win = new Sound("/resources/soundresources/win.wav");
+
 
     private static Player player;
 
@@ -106,6 +109,7 @@ public class Game {
             }
         } else {
             picture.draw();
+            win.play(true);
         }
     }
 }

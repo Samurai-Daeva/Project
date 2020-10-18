@@ -1,5 +1,7 @@
 package org.academiadecodigo.bitjs.game;
 
+import org.academiadecodigo.bitjs.game.gameobjects.Movement;
+import org.academiadecodigo.bitjs.game.sound.src.org.academiadecodigo.bootcamp.Sound;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -10,12 +12,17 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
         private KeyboardEvent key_Q;
         private KeyboardEvent key_I;
+
         private Game game;
+
+        private Sound menuMusic = new Sound("/resources/soundresources/menumusic.wav");
 
         public void init(){
             this.game = new Game(80, 25, 200);
             Picture picture = new Picture(10,10,"resources/startmenu.png");
             picture.draw();
+            menuMusic.play(true);
+            menuMusic.setLoop(4);
             bootstrap();
 
         }
@@ -37,10 +44,15 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
         @Override
         public void keyPressed(KeyboardEvent keyboardEvent) {
             if(keyboardEvent.getKey() == KeyboardEvent.KEY_Q){
+                menuMusic.close();
+                Interaction.closeSounds();
+                Movement.closeSound();
                 System.exit(1);
 
             }else {
+
                 game.init();
+                menuMusic.close();
             }
         }
 

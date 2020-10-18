@@ -4,13 +4,14 @@ import org.academiadecodigo.bitjs.game.Game;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.GridPosition;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx.SimpleGfxGrid;
 import org.academiadecodigo.bitjs.game.graphicsbuilder.simplegfx.SimpleGfxGridPosition;
+import org.academiadecodigo.bitjs.game.sound.src.org.academiadecodigo.bootcamp.Sound;
 import org.academiadecodigo.simplegraphics.graphics.Movable;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.bitjs.game.battle.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.academiadecodigo.bitjs.game.graphicsbuilder.grid.position.Position;
+
 
 
 public class Player extends Character implements Damage, KeyboardHandler {
@@ -40,6 +41,11 @@ public class Player extends Character implements Damage, KeyboardHandler {
     private Picture wrong = new Picture(10, 10, "resources/wrong.png");
     private Picture talk1 = new Picture(250, 10, "resources/ballon.png");
     private Picture talk2 = new Picture(500, 500, "resources/ballon.png");
+    private Sound ambience = new Sound("/resources/soundresources/roommusic.wav");
+    private Sound computerAmbience = new Sound("/resources/soundresources/computer.wav");
+
+
+
 
     private GridPosition pos;
 
@@ -68,6 +74,8 @@ public class Player extends Character implements Damage, KeyboardHandler {
         movement = new Movement(this);
         movement.init();
         playerPicture.draw();
+        ambience.play(true);
+        ambience.setLoop(10);
     }
 
     @Override
@@ -155,6 +163,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
 
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
 
             else{
@@ -183,6 +192,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
 
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
 
             else{
@@ -202,7 +212,8 @@ public class Player extends Character implements Damage, KeyboardHandler {
         } else if (grid.getCounter() == 14) {
             Game.interact();
 
-        } else if (grid.getCounter() == 6 || grid.getCounter() == 7 || grid.getCounter() == 15 || grid.getCounter() == 12) {
+        } else if (grid.getCounter() == 6 || grid.getCounter() == 7 || grid.getCounter() == 15 ||
+                grid.getCounter() == 12) {
             wrong.draw();
 
             try {
@@ -213,6 +224,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
 
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
             else{
                 health -= 100;
@@ -230,7 +242,8 @@ public class Player extends Character implements Damage, KeyboardHandler {
         } else if (grid.getCounter() == 17) {
             Game.interact();
 
-        } else if (grid.getCounter() == 6 || grid.getCounter() == 10 || grid.getCounter() == 12 || grid.getCounter() == 7) {
+        } else if (grid.getCounter() == 6 || grid.getCounter() == 10 || grid.getCounter() == 12 ||
+                grid.getCounter() == 7) {
             wrong.draw();
 
             try {
@@ -241,6 +254,7 @@ public class Player extends Character implements Damage, KeyboardHandler {
 
             if(health <= 0){
                 setDead(true);
+                computerAmbience.close();
             }
 
             else{
@@ -264,10 +278,6 @@ public class Player extends Character implements Damage, KeyboardHandler {
         return damageCapacity;
     }
 
-    public int getHealth() {
-        return this.health;
-    }
-
     public Picture getTalk() {
         return talk1;
     }
@@ -286,6 +296,10 @@ public class Player extends Character implements Damage, KeyboardHandler {
 
     public void setCodeUp(boolean codeUp) {
         this.codeUp = codeUp;
+        ambience.close();
+        computerAmbience.play(true);
+        computerAmbience.setLoop(10);
+
     }
 
     public boolean isDamaged() {

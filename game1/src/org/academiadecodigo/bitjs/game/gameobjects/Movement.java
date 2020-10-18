@@ -1,5 +1,6 @@
 package org.academiadecodigo.bitjs.game.gameobjects;
 
+import org.academiadecodigo.bitjs.game.sound.src.org.academiadecodigo.bootcamp.Sound;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -22,6 +23,7 @@ public class Movement implements KeyboardHandler {
     private KeyboardEvent key_4;
 
     private Picture picture1 = new Picture(10, 10, "resources/you_lose.png");
+    private static Sound lose = new Sound("/resources/soundresources/lose.wav");
 
     public Movement(Player player) {
         this.player = player;
@@ -89,6 +91,7 @@ public class Movement implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if(player.isDamaged()){
             picture1.draw();
+            lose.play(true);
             return;
         }
 
@@ -160,5 +163,8 @@ public class Movement implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
+    }
+    public static void closeSound(){
+        lose.close();
     }
 }
